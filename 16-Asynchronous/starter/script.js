@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
-const btn = document.querySelector('.btn-country');
-let countriesContainer = document.querySelector('.countries');
+const btn = document.querySelector('.btn-country')
+const countriesContainer = document.querySelector('.countries')
 
-///////////////////////////////////////
+/// ////////////////////////////////////
 
 const renderCountry = (data, className = '') => {
   // COUNTRY PROPERTIES
@@ -29,37 +29,50 @@ const renderCountry = (data, className = '') => {
   countriesContainer.style.opacity = 1
 }
 
-const getCountryAndNeighbor = (country) => {
-  //AJAX  call 1 main country
-  const request = new XMLHttpRequest()
-  request.open('GET', `https://restcountries.com/v3.1/name/${country}`)
-  request.send()
+/**
+ *
+ * Using XMLHttpRequest to make api calls
+ */
 
-  request.addEventListener('load', function () {
-    const [data] = JSON.parse(this.responseText)
-    console.log(data);
+// const getCountryAndNeighbor = (country) => {
+//   //AJAX  call 1 main country
+//   const request = new XMLHttpRequest()
+//   request.open('GET', `https://restcountries.com/v3.1/name/${country}`)
+//   request.send()
 
-    // Render country
-    renderCountry(data)
+//   request.addEventListener('load', function () {
+//     const [data] = JSON.parse(this.responseText)
+//     console.log(data);
 
-    // Get neighbor country
-    const neighbors = data.borders
-    if (!neighbors) return
+//     // Render country
+//     renderCountry(data)
 
-    neighbors.forEach(neighbor => {
-      let request2 = new XMLHttpRequest()
-      request2.open('GET', `https://restcountries.com/v3.1/alpha/${neighbor}`)
-      request2.send()
+//     // Get neighbor country
+//     const neighbors = data.borders
+//     if (!neighbors) return
 
-      request2.addEventListener('load', function () {
-        // console.log(this.responseText);
-        const [data2] = JSON.parse(this.responseText)
-        console.log(data2);
-        renderCountry(data2,'neighbor')
-      });
+//     neighbors.forEach(neighbor => {
+//       let request2 = new XMLHttpRequest()
+//       request2.open('GET', `https://restcountries.com/v3.1/alpha/${neighbor}`)
+//       request2.send()
 
-    })
-  })
+//       request2.addEventListener('load', function () {
+//         // console.log(this.responseText);
+//         const [data2] = JSON.parse(this.responseText)
+//         console.log(data2);
+//         renderCountry(data2, 'neighbor')
+//       });
+
+//     })
+//   })
+// }
+// getCountryAndNeighbor('cameroon')
+
+
+const getCountryData = (country) => {
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then((response) => response.json())
+    .then((data) => renderCountry(data[0]))
 }
 
-getCountryAndNeighbor('cameroon')
+getCountryData('cameroon')
