@@ -29,7 +29,9 @@ body {
 .countries {
   /* margin-bottom: 8rem; */
   display: flex;
-
+  flex-wrap: wrap;
+  gap: 2rem;
+  /* justify-content: center; */
   font-size: 2rem;
   opacity: 0;
   transition: opacity 1s;
@@ -45,8 +47,8 @@ body {
   /* overflow: hidden; */
 }
 
-.neighbour::before {
-  content: 'Neighbour country';
+.neighbor::before {
+  content: 'Neighbor country';
   width: 100%;
   position: absolute;
   top: -4rem;
@@ -58,7 +60,7 @@ body {
   color: #888;
 }
 
-.neighbour {
+.neighbor {
   transform: scale(0.8) translateY(1rem);
   margin-left: 0;
 }
