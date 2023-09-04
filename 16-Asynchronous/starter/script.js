@@ -88,17 +88,31 @@ const renderCountry = (data, className = '') => {
 // })
 // console.log('Test end');
 
-const lotteryPromise = new Promise(function (resolve, reject) {
+// const lotteryPromise = new Promise(function (resolve, reject) {
 
-  console.log('Lottery draw is happening')
-  setTimeout(() => {
-    if (Math.random() >= 0.5) {
-      resolve('You win much money')
-    } else {
-      reject(new Error('You lost all ya money ya'))
-    }
-  }, 2000)
+//   console.log('Lottery draw is happening')
+//   setTimeout(() => {
+//     if (Math.random() >= 0.5) {
+//       resolve('You win much money')
+//     } else {
+//       reject(new Error('You lost all ya money ya'))
+//     }
+//   }, 2000)
 
+// })
+
+// lotteryPromise.then(res => console.log(res)).catch(err => console.error(err))
+
+// Promisifying the setTimeout
+const wait = (seconds) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 1000)
+  })
+}
+
+wait(2).then(() => {
+  console.log('I waited for 2 seconds')
+  return wait(1)
+}).then(() => {
+  console.log('I waited for 1 second');
 })
-
-lotteryPromise.then(res => console.log(res)).catch(err => console.error(err))
