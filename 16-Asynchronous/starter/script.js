@@ -26,7 +26,7 @@ const renderCountry = (data, className = '') => {
     </article>`
 
   countriesContainer.insertAdjacentHTML('beforeend', html)
-  countriesContainer.style.opacity = 1
+  countriesContainer.style.opacity = 0
 }
 
 /**
@@ -68,11 +68,22 @@ const renderCountry = (data, className = '') => {
 // }
 // getCountryAndNeighbor('cameroon')
 
+// const getCountryData = (country) => {
+//   // get country 1
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//   .then(response => response.json())
+//   .then(data => {
+//     renderCountry(data[0])
+//   })
+// }
 
-const getCountryData = (country) => {
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then((response) => response.json())
-    .then((data) => renderCountry(data[0]))
-}
+// getCountryData('portugal')
 
-getCountryData('cameroon')
+console.log('Test start')
+setTimeout(() => console.log('0 sec timer'), 0)
+Promise.resolve('Resolved promise 1').then(res => console.log(res))
+Promise.resolve('Resolve promise 2').then(res => {
+  for (let i = 0; i <= 1000000000; i++){}
+    console.log(res)
+})
+console.log('Test end');
