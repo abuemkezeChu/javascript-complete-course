@@ -26,7 +26,7 @@ const renderCountry = (data, className = '') => {
     </article>`
 
   countriesContainer.insertAdjacentHTML('beforeend', html)
-  countriesContainer.style.opacity = 0
+  countriesContainer.style.opacity = 1
 }
 
 /**
@@ -104,15 +104,25 @@ const renderCountry = (data, className = '') => {
 // lotteryPromise.then(res => console.log(res)).catch(err => console.error(err))
 
 // Promisifying the setTimeout
-const wait = (seconds) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 1000)
-  })
-}
+// const wait = (seconds) => {
+//   return new Promise((resolve) => {
+//     setTimeout(resolve, 1000)
+//   })
+// }
 
-wait(2).then(() => {
-  console.log('I waited for 2 seconds')
-  return wait(1)
-}).then(() => {
-  console.log('I waited for 1 second');
-})
+// wait(2).then(() => {
+//   console.log('I waited for 2 seconds')
+//   return wait(1)
+// }).then(() => {
+//   console.log('I waited for 1 second');
+// })
+
+// Consuming promises with async/await
+const whereAmI = async (country) =>{
+  const response = await fetch(`https://restcountries.com/v3.1/name/${country}`)
+  const [data] = await response.json()
+  console.log(data) //using the await keyword is the same as using the then() to consume a promise
+  renderCountry(data)
+}
+whereAmI('afghanistan')
+console.log('Print FIRST');
