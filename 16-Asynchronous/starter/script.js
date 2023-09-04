@@ -79,11 +79,26 @@ const renderCountry = (data, className = '') => {
 
 // getCountryData('portugal')
 
-console.log('Test start')
-setTimeout(() => console.log('0 sec timer'), 0)
-Promise.resolve('Resolved promise 1').then(res => console.log(res))
-Promise.resolve('Resolve promise 2').then(res => {
-  for (let i = 0; i <= 1000000000; i++){}
-    console.log(res)
+// console.log('Test start')
+// setTimeout(() => console.log('0 sec timer'), 0)
+// Promise.resolve('Resolved promise 1').then(res => console.log(res))
+// Promise.resolve('Resolve promise 2').then(res => {
+//   for (let i = 0; i <= 1000000000; i++){}
+//     console.log(res)
+// })
+// console.log('Test end');
+
+const lotteryPromise = new Promise(function (resolve, reject) {
+
+  console.log('Lottery draw is happening')
+  setTimeout(() => {
+    if (Math.random() >= 0.5) {
+      resolve('You win much money')
+    } else {
+      reject(new Error('You lost all ya money ya'))
+    }
+  }, 2000)
+
 })
-console.log('Test end');
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err))
